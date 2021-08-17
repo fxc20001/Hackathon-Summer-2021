@@ -5,3 +5,5 @@ data/
 test_data
 train_data
 .DS_Store
+.ipynb_checkpoints
+Untitled.ipynb
