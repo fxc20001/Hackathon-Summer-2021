@@ -2,3 +2,6 @@ docs/flier.pptx
 data/
 .Rproj.user
 .Renviron
+test_data
+train_data
+.DS_Store
