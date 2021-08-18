@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-from sklearn.preprocessing import StandardScaler,MinMaxScaler
+from sklearn.preprocessing import MinMaxScaler
 from sklearn.decomposition import PCA
 from sklearn.model_selection import train_test_split
 
@@ -12,8 +12,20 @@ from sklearn.model_selection import train_test_split
 #       2.2) scaler
 #       2.3) PCA
 
+# read data
 features = pd.read_csv('train_data/train_expression.csv')
 labels = pd.read_csv('train_data/train_labels.csv')
+
+# number of features of raw data
+size_features = len(features.columns)
+
+# get features with correlation > 0.05 with label
+corr = [labels['age'].corr(features[features.columns[i]]) for i in range(size_features)]
+sorted_corr = [i for i in sorted(enumerate(corr), key=lambda x:abs(x[1]), reverse=True)]
+
+features_strong_index = [i[0] for i in sorted_corr if abs(i[1]) > 0.05]
+features_strong = features[[features.columns[i] for i in features_strong_index]]
+
 
 # NOTE:
 # check correlation between age and each feature: 
